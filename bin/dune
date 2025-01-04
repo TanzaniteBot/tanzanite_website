@@ -1,0 +1,5 @@
+(executable
+ (name main)
+ (public_name tanzanite_website)
+ (package tanzanite_website)
+ (libraries tanzanite_website))

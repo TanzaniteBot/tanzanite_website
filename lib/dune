@@ -1,0 +1,4 @@
+(library
+ (name tanzanite_website)
+ (libraries dream)
+ (package tanzanite_website))
