@@ -188,6 +188,25 @@
               uri
             ];
           };
+          tyxml-syntax = p.buildDunePackage {
+            pname = "tyxml-syntax";
+            inherit (p.tyxml) version src;
+            propagatedBuildInputs =
+              with f;
+              p.tyxml.propagatedBuildInputs
+              ++ [
+                ppxlib
+              ];
+          };
+          tyxml-jsx = p.buildDunePackage {
+            pname = "tyxml-jsx";
+            inherit (p.tyxml) version src;
+            propagatedBuildInputs = with f; [
+              tyxml
+              tyxml-syntax
+              ppxlib
+            ];
+          };
           # dev env
           merlin = p.merlin.overrideAttrs (o: rec {
             version = "5.3-502";
@@ -204,7 +223,6 @@
               sha256 = "sha256-J+5UOJpGcBASphLczR9vKf81PjSMe6beD+43dn26OSE=";
             };
             name = "ocaml${p.ocaml.version}-${o.pname}-${version}";
-
           });
           lsp = p.lsp.overrideAttrs (o: rec {
             inherit (p.jsonrpc) version src;

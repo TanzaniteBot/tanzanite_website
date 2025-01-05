@@ -1,4 +1,6 @@
 (library
  (name tanzanite_website)
- (libraries dream)
- (package tanzanite_website))
+ (package tanzanite_website)
+ (libraries dream tyxml)
+ (preprocess
+  (pps lwt_ppx tyxml-jsx)))

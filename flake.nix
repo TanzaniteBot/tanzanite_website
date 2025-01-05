@@ -52,6 +52,7 @@
         let
           ocamlPackages = pkgs.ocamlPackages;
           buildDunePackage = ocamlPackages.buildDunePackage;
+          fs = lib.fileset;
         in
         {
           default = self.packages.${pkgs.system}.${project};
@@ -59,10 +60,29 @@
           ${project} = buildDunePackage {
             pname = "tanzanite_website";
             version = "0.1.0";
-            src = ./.;
+            src = fs.toSource {
+              root = ./.;
+              fileset = fs.unions [
+                ./dune-project
+                ./opam
+                ./bin
+                ./lib
+                ./test
+              ];
+            };
+
+            preBuild = ''
+              export DUNE_CACHE=disabled
+            '';
+
+            nativeBuildInputs = [
+              ocamlPackages.reason
+            ];
 
             buildInputs = [
               ocamlPackages.dream
+              ocamlPackages.tyxml
+              ocamlPackages.tyxml-jsx
             ];
           };
         }
@@ -136,6 +156,7 @@
               treefmtEval.${pkgs.system}.config.build.wrapper
               pkgs.fswatch
               ocamlPackages.ocamlformat
+              ocamlPackages.reason
               ocamlPackages.merlin
               ocamlPackages.odoc
               ocamlPackages.ocaml-lsp

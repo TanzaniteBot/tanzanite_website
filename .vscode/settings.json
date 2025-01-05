@@ -34,6 +34,7 @@
     "include": [
       "ocaml",
       "ocaml.interface",
+      "reason",
       "nix"
     ],
     "enforceHeader": true,
@@ -44,6 +45,11 @@
       "language": "ocaml",
       "begin": "(*",
       "end": "*)",
+      "prefix": "  ",
+      "blankLinesAfter": 1
+    },
+    {
+      "language": "reason",
       "prefix": "  ",
       "blankLinesAfter": 1
     },

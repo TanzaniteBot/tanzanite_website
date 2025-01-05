@@ -21,6 +21,7 @@
     "COPYING"
     ".envrc"
     ".ocamlformat"
+    "*.opam"
   ];
   programs = {
     deadnix.enable = true;
@@ -46,6 +47,15 @@
       includes = [
         "dune-project"
         "**/dune"
+      ];
+    };
+    "refmt" = {
+      command = "${pkgs.ocamlPackages.reason}/bin/refmt";
+      options = [
+        "--in-place"
+      ];
+      includes = [
+        "*.re"
       ];
     };
   };
